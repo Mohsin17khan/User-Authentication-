@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: rgb(29, 29, 29);
+        color: white;
+        font-family: cursive;
+        /* text-transform: capitalize; */
+      }
+      .first-text {
+        color: rgb(227, 227, 48);
+      }
+      .container {
+        padding: 30px 100px;
+        max-width: 500px;
+      }
+      #id {
+        background: transparent;
+        resize: none;
+        width: 90%;
+        border-radius: 7px;
+        height: 120px;
+        padding: 20px 20px;
+        color: white;
+        display: block;
+      }
+      .heading {
+        line-height: 25px;
+      }
+      .submit-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 7px;
+        outline: none;
+        border: none;
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        background-color: rgb(19, 119, 156);
+        cursor: pointer;
+      }
+
+      .logout {
+        text-align: right;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+      .logout a {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 700;
+        background-color: red;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+
+      .content-boxes {
+        background-color: rgb(35, 32, 32);
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 15px 10px 25px 14px;
+        outline: none;
+        margin-bottom: 5px;
+      }
+      .content-boxes span {
+        color: rgb(22, 138, 180);
+      }
+      .para {
+        margin-top: 10px;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 17px;
+      }
+
+      .like {
+        text-decoration: none;
+        color: rgb(22, 138, 180);
+      }
+      .edit {
+        text-decoration: none;
+        color: gray;
+      }
+      .likes {
+        margin-top: 15px;
+      }
+      .delete {
+        display: flex;
+        justify-content: space-between;
+      }
+      .delete a {
+        padding-right: 10px;
+        color: gray;
+        text-decoration: none;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logout">
+        <a href="/logout">Log Out</a>
+      </div>
+      <div class="heading">
+        <h1><span class="first-text">Hello</span>, <%= user.name %> ✋</h1>
+        <h2>You can create a new post</h2>
+      </div>
+
+      <form action="/post" method="post">
+        <textarea
+          id="id"
+          placeholder="What is Your through ?"
+          name="content"
+        ></textarea>
+        <input class="submit-btn" type="submit" value="Create New Post" />
+      </form>
+      <h2>Your Posts</h2>
+      <% if(user.posts && user.posts.length > 0) { %> <%
+      user.posts.reverse().forEach(function(post, index){ %>
+      <div class="content-boxes" style="margin-bottom: 20px">
+        <div class="delete">
+          <span><%= user.email %></span>
+          <a href="/delete/<%= post._id%>">Delete</a>
+        </div>
+        <div class="para"><%= post.content %></div>
+        <div class="likes"><%=post.likes.length %> likes</div>
+        <div class="btn">
+          <a href="/like/<%= post._id %>" class="like">
+            <%= post.likes.indexOf(user._id) === -1 ? "Like" :"UnLike" %>
+          </a>
+          <a href="/edit/<%=post._id%>" class="edit">Edit</a>
+        </div>
+      </div>
+      <% }) %> <% } else { %>
+      <div class="content-boxes">
+        <p>No posts yet. Create your first post above!</p>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

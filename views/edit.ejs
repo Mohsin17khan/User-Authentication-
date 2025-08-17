@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+        background-color: rgb(29, 29, 29);
+        color: white;
+        font-family: cursive;
+        }
+        .container{
+            padding: 50px;
+        }
+        #id {
+        background: transparent;
+        resize: none;
+        width: 30%;
+        border-radius: 7px;
+        height: 120px;
+        padding: 20px 20px;
+        color: white;
+        display: block;
+      }
+      .container h2{
+        color: yellow;
+      }
+
+      .submit-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 7px;
+        outline: none;
+        border: none;
+        color: black;
+        font-size: 15px;
+        font-weight: 700;
+        background-color: rgb(234, 234, 27);
+        cursor: pointer;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h2>Update Your Post</h2>
+    <form action="/update/<%= post._id %>" method="post">
+        <textarea
+          id="id"
+          placeholder="What is Your through ?"
+          name="content"
+        ><%= post.content%></textarea>
+        <input class="submit-btn" type="submit" value="Update Your Post" />
+      </form>
+    </div>
+    
+</body>
+</html>
